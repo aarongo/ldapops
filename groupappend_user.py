@@ -7,10 +7,8 @@ from tools import cli
 def add_user_group(ldap_obj, args):
     """
     将用户添加到组,或者将用户从组中删除
-    :param name: 要操作的用户名
-    :param group_name: 要在哪个组中操作
-    :param action: 准备什么操作 [add, delete]
-    :param user_type: 用户是什么类型, 是登陆服务器,还是使用文档平台
+    :param ldap_obj: LDAP 实例
+    :param args: 外部所有参数
     :return:
     """
 

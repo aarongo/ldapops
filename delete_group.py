@@ -5,6 +5,12 @@ from tools import cli
 
 
 def delete_ou_or_cn(ldap_obj, args):
+    """
+
+    :param ldap_obj: LDAP 实例
+    :param args: 外部所有参数
+    :return:
+    """
     delete_ou_or_cn_json = {}
     data = None
     if args.level == 1:

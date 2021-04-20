@@ -8,7 +8,7 @@ def ou(ldap_obj, args):
     """
 
     :param: ldap_obj: Ldap 实例化
-    :param name: 要创建的 ou 名称
+    :param args: 外部所有参数
     :return:
     """
     create_ou_json = {

@@ -9,7 +9,7 @@ def ou_cn(ldap_obj, args):
     """
 
     :param ldap_obj: Ldap Ldap 实例化
-    :param name: 嵌套组的名称
+    :param args: 外部所有参数
     :return:
     """
     create_ou_cn_json = {

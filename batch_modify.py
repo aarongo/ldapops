@@ -5,6 +5,12 @@ from tools.service_instance import LDAP
 
 
 def modify_attribute(ldap_obj, args):
+    """
+
+    :param ldap_obj: LDAP 实例
+    :param args: 外部所有参数
+    :return:
+    """
     modify_json = {
         'ou': args.ou_name,
         'will_attribute_name': args.attribute_name,
