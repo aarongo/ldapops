@@ -42,8 +42,7 @@ def create_user(ldap_obj, args):
         "ou": "{}".format(args.group_name),
         "uid": "{}".format(args.user_name),
         "objectclass": objectclass,
-        'attribute': attribute,
-        "base_dn": args.base_dc
+        'attribute': attribute
     }
 
     data = ldap_obj.get_users(**create_or_delete_user)

@@ -15,8 +15,7 @@ def ou(ldap_obj, args):
         "search_string": "{}".format(args.ou_name),  # 默认搜索字符串
         "ou": "{}".format(args.ou_name),
         "object_class": ['top', 'organizationalUnit'],
-        "attribute": {'ou': '{}'.format(args.ou_name)},
-        "base_dn": args.base_dc
+        "attribute": {'ou': '{}'.format(args.ou_name)}
     }
     data = ldap_obj.get_ou(**create_ou_json)
 

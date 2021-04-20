@@ -22,7 +22,7 @@ class LDAP:
         :return: LIST: 操作的响应结果,包含 UID
         """
         # status: 操作是否成功 result: 操作的结果 response: 操作的响应结果 request: 原始发送的请求
-        status, result, response, _ = self.conn.search('ou={},dc=magic,dc=com'.format(kwargs.get('ou')),
+        status, result, response, _ = self.conn.search('ou={},{}'.format(kwargs.get('ou'), self.args.base_dc),
                                                        '(objectclass=posixAccount)',
                                                        attributes=['uid'])  # attributes 限制查询出来的属性包括
 
@@ -51,7 +51,8 @@ class LDAP:
         """
         search_filter = '(|(objectclass=posixGroup)(objectclass=groupOfUniqueNames))'
 
-        status, result, response, _ = self.conn.search('ou=Groups,dc=magic,dc=com', search_filter, attributes=['cn'])
+        status, result, response, _ = self.conn.search('ou=Groups,{}'.format(self.args.base_dc), search_filter,
+                                                       attributes=['cn'])
 
         data = [row['attributes'] for row in response]
 
@@ -70,9 +71,9 @@ class LDAP:
             # 根据定义的用户角色生成不同的dn 信息
             if kwargs.get('admin'):
                 cn = "cn={}".format(kwargs.get('attribute').get('cn'))
-                dn = "{},{},{}".format(cn, ou, kwargs.get('base_dn'))
+                dn = "{},{},{}".format(cn, ou, self.args.base_dc)
             else:
-                dn = "{},{},{}".format(uid, ou, kwargs.get('base_dn'))
+                dn = "{},{},{}".format(uid, ou, self.args.base_dc)
             object_class = kwargs.get('objectclass')
             attribute = kwargs.get('attribute')
             status, result, response, _ = self.conn.add(dn, object_class, attribute)
@@ -94,7 +95,7 @@ class LDAP:
         if ldap_search(*args, **kwargs):
             ou = "ou={}".format(kwargs.get('ou'))
             uid = "uid={}".format(kwargs.get('uid'))
-            dn = "{},{},{}".format(uid, ou, kwargs.get('base_dn'))
+            dn = "{},{},{}".format(uid, ou, self.args.base_dc)
             status, result, response, _ = self.conn.delete(dn)
             # 如果创建成功直接返回 True,如果失败返回失败描述
             if status:
@@ -114,7 +115,7 @@ class LDAP:
         # 传入*args **kwargs目的,将变量直接处理成 数组和 dict
         if not ldap_search(*args, **kwargs):
             ou = kwargs.get('ou')
-            dn = "ou={},{}".format(ou, kwargs.get('base_dn'))
+            dn = "ou={},{}".format(ou, self.args.base_dc)
             object_class = kwargs.get('object_class')
             attribute = kwargs.get('attribute')
             status, result, response, _ = self.conn.add(dn, object_class, attribute)

@@ -15,8 +15,7 @@ def delete_user(ldap_ohj, args):
     delete_user = {
         "search_string": "{}".format(args.user_name),  # 默认搜索字符串
         "ou": "{}".format(args.group_name),
-        "uid": "{}".format(args.user_name),
-        "base_dn": args.base_dc
+        "uid": "{}".format(args.user_name)
     }
 
     data = ldap_ohj.get_users(**delete_user)
