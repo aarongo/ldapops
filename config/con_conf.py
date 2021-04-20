@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+__author__ = "ModeYl"
+
+
 _LDAP_HOST = "ldap-server.magic.com"
 _LDAP_PORT = 389
 _LDAP_USER = "cn=manager,dc=magic,dc=com"
