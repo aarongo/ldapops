@@ -30,7 +30,7 @@ class LDAP:
 
         return data
 
-    def get_ou(self):
+    def get_ou(self, **kwargs):
         """
         获取顶级所有 OU信息
         :return:
@@ -116,6 +116,7 @@ class LDAP:
         if not ldap_search(*args, **kwargs):
             ou = kwargs.get('ou')
             dn = "ou={},{}".format(ou, self.args.base_dc)
+            print(dn)
             object_class = kwargs.get('object_class')
             attribute = kwargs.get('attribute')
             status, result, response, _ = self.conn.add(dn, object_class, attribute)

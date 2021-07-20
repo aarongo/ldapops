@@ -37,4 +37,4 @@ if __name__ == '__main__':
 
     ldap_obj = LDAP(args)
 
-    ou(ldap_obj, args)
+    # ou(ldap_obj, args)
